@@ -98,7 +98,7 @@ export const Encrypt = (data: string, mode: "Rijndael" | "AES256" = "Rijndael"):
       const cipher = crypto.createCipheriv("aes-256-cbc", Buffer.from(process.env.ROOT_KEY || "", "hex"), ivl)
       return Buffer.concat([ivl, cipher.update(Buffer.from(data, "utf16le")), cipher.final()]).toString("base64")
     }
-  } catch {}
+  } catch(err) {console.log(err)}
   return undefined
 }
 
