@@ -17,7 +17,7 @@ print(new_researcher, researcher_id)
 new_study = LAMP.models.study.Study(
     name="Test study"
 )
-study_id = LAMP.Study.create(researcher_id, new_researcher)["data"]
+study_id = LAMP.Study.create(researcher_id, new_study)["data"]
 print(new_study, study_id)
 
 
@@ -26,8 +26,19 @@ participant_id = LAMP.Participant.create(study_id, new_participant)["data"]["id"
 print(new_participant, participant_id)
 
 
+new_activity = LAMP.models.activity.Activity(
+    name="Test activity",
+    spec="lamp.survey"
+)
+activity_id = LAMP.Activity.create(study_id, new_activity)["data"]
+print(new_activity, activity_id)
+
+
+
+
 print(LAMP.Participant.all_by_study(study_id))
 
+LAMP.Activity.delete(activity_id)
 LAMP.Participant.delete(participant_id)
 LAMP.Study.delete(study_id)
 LAMP.Researcher.delete(researcher_id)
